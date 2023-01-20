@@ -13,7 +13,7 @@ CC = cc
 CFLAGS =# -Wall -Werror -Wextra
 
 .c.o:
-		${CC} ${CFLAGS} ${INC} -MMD -c $< -o ${<:.c=.o}
+		${CC} ${CFLAGS} ${INC} -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS} 
 		+$(MAKE) -C libft
@@ -30,8 +30,6 @@ fclean:	clean;
 		rm -f ${NAME} ${BONUS}
 
 re:	fclean all
-
--include ${DEPS}
 
 # My rules
 
