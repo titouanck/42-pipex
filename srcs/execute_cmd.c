@@ -6,17 +6,16 @@
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 02:41:59 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/26 00:07:58 by tchevrie         ###   ########.fr       */
+/*   Updated: 2023/01/26 00:27:33 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static int	execute_cmd_pid_0(char *cmd, t_env *env, char **args)
+static int	execute_cmd_pid_0(t_env *env, char **args)
 {
 	size_t	i;
 	char	*bin;
-	char	*err;
 
 	i = 0;
 	while (1)
@@ -40,7 +39,6 @@ int	execute_cmd(char *cmd, t_env *env)
 {
 	char	**args;
 	int		pid;
-	int		return_value;
 	int		status;
 	char	*err;
 
@@ -52,8 +50,8 @@ int	execute_cmd(char *cmd, t_env *env)
 		return (perror("pipex: fork"), free_tabstr(args), 0);
 	if (pid == 0)
 	{
-		return_value = execute_cmd_pid_0(cmd, env, args);
-		if (return_value == 0)
+		status = execute_cmd_pid_0(env, args);
+		if (status == 0)
 			return (0);
 		err = ft_strrjoin("pipex: command not found: ", args[0], "\n");
 		ft_putstr_fd(err, 2);

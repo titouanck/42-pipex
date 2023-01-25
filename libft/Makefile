@@ -34,10 +34,10 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -I ./
 
 .c.o:
-	@	${CC} ${CFLAGS} -MMD -c $< -o ${<:.c=.o}
+		${CC} ${CFLAGS} -MMD -c $< -o ${<:.c=.o}
 
 ${LIB}:	${OBJS}
-	@	ar -rsc ${LIB} ${OBJS}
+		ar -rsc ${LIB} ${OBJS}
 
 all: 	${LIB}
 

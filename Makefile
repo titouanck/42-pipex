@@ -1,4 +1,5 @@
-SRCS =	${wildcard srcs/*.c}
+SRCS =	srcs/end_pipex.c	srcs/execute_cmd.c	srcs/first_part.c 	srcs/last_part.c	srcs/middle_part.c \
+		srcs/open_files.c	srcs/path.c	srcs/pipex.c
 
 OBJS = ${SRCS:.c=.o}
 
@@ -6,11 +7,9 @@ INC = -I inc/ -I libft
 LIBFTPATH = -L libft -lft
 LIBS = ${INC} ${LIBFTPATH}
 
-# NUMBERS = 3 1 2 4
-
 NAME = pipex
 CC = cc
-CFLAGS =# -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 
 .c.o:
 		${CC} ${CFLAGS} ${INC} -c $< -o ${<:.c=.o}
@@ -22,25 +21,11 @@ ${NAME}:	${OBJS}
 all:	${NAME}
 
 clean:	
-#	@	+$(MAKE) -C libft clean
+	@	+$(MAKE) -C libft clean
 	@	rm -f ${OBJS} ${DEPS} ${OBJSBONUS} ${DEPSBONUS}
 
 fclean:	clean;
 	@	+$(MAKE) -C libft fclean
 	@	@rm -f ${NAME} ${BONUS}
 
-run:
-		make clean
-		gcc -g srcs/*.c libft/*/*.c -I inc -I libft/
-		clear
-	@	./a.out infile "grep i" "grep i" outfile
-
 re:	fclean all
-
-# My rules
-
-norminette:
-		clear
-		norminette srcs/
-		norminette inc/
-		norminette libft/
