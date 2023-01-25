@@ -6,7 +6,7 @@
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:27:09 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/25 17:06:53 by tchevrie         ###   ########.fr       */
+/*   Updated: 2023/01/25 17:40:25 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,20 @@ typedef struct s_fd
 }		t_fd;
 
 // get_path.c
-void		print_path(char **path);
 char		**get_path(char *envp[]);
-void		free_path(char **path);
 
 // open_files.c
 int			open_files(char *infile, char *outfile, int fd[2]);
-int			open_infile(const char *filename);
-int			open_outfile(const char *filename);
 
 // execute_cmd.c
 int			execute_cmd(char *cmd, char **path);
 
 // end_pipex.c
 void		end_pipex(int fd[2], char **path);
-void		free_path(char **path);
 
-// print_file.c
+// utils.c
 void		print_file(int fd);
+void		print_path(char **path);
 
 
 #endif

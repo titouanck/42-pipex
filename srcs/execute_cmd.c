@@ -6,7 +6,7 @@
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 02:41:59 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/25 17:31:45 by tchevrie         ###   ########.fr       */
+/*   Updated: 2023/01/25 17:39:01 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	execute_cmd(char *cmd, char **path)
 		return (ft_putstr_fd(ERR_ALLOC, 2), 0);
 	pid = fork();
 	if (pid == -1)
-		return (perror("fork()"), free_split(args), 0);
+		return (perror("fork()"), free_tabstr(args), 0);
 	if (pid == 0)
 	{
 		i = 0;
@@ -36,7 +36,7 @@ int	execute_cmd(char *cmd, char **path)
 				break ;
 			bin = ft_strrjoin(path[i], "/", args[0]);
 			if (!bin)
-				return (ft_putstr_fd(ERR_ALLOC, 2), free_split(args), 0);
+				return (ft_putstr_fd(ERR_ALLOC, 2), free_tabstr(args), 0);
 			if (execve(bin, args, env) <= 0)
 			{
 				free(bin);
@@ -50,5 +50,5 @@ int	execute_cmd(char *cmd, char **path)
 	}
 	else
 		wait(NULL);
-	return (free_split(args), 0);
+	return (free_tabstr(args), 0);
 }

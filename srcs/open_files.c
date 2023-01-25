@@ -6,13 +6,13 @@
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 01:57:46 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/25 14:25:59 by tchevrie         ###   ########.fr       */
+/*   Updated: 2023/01/25 17:36:46 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	open_infile(const char *filename)
+static int	open_infile(const char *filename)
 {
 	int	fd;
 
@@ -20,7 +20,7 @@ int	open_infile(const char *filename)
 	return (fd);
 }
 
-int	open_outfile(const char *filename)
+static int	open_outfile(const char *filename)
 {
 	int	fd;
 

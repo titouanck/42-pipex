@@ -6,7 +6,7 @@
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:26:58 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/25 17:28:25 by tchevrie         ###   ########.fr       */
+/*   Updated: 2023/01/25 17:39:53 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ static int	pipex(char **args, int size, char **path)
 	// size_t	i;
 
 	if (!open_files(args[0], args[size - 1], fd))
-		return (free_path(path), 0);
+		return (free_tabstr(path), 0);
 	if (!first_part(fd, pipefd, args[1], path))
 		return (0);
 	// middle_cmds = size - 4;
