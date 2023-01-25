@@ -35,3 +35,11 @@ echo -n "./pipex infile "ls -l" "wc -l" outfile\n\n"
 valgrind --leak-check=full ./pipex infile "ls -l" "wc -l" outfile
 echo "\n\tDIFF 4:" >> tester.log
 diff outfile outfilebis >> tester.log
+
+echo -n "< infilebis grep i | grep v | grep t > outfilebis\n\n"
+< infilebis grep i | grep v | grep t > outfilebis
+echo -n "\n\n----------\n\n\n"
+echo -n "./pipex infile "grep i" "grep v" "grep t" outfile\n\n"
+valgrind --leak-check=full ./pipex infile "grep i" "grep v" "grep t" outfile
+echo "\n\tDIFF 5:" >> tester.log
+diff outfile outfilebis >> tester.log
