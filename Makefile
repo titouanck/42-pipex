@@ -13,16 +13,16 @@ CC = cc
 CFLAGS =# -Wall -Werror -Wextra
 
 .c.o:
-	@	${CC} ${CFLAGS} ${INC} -c $< -o ${<:.c=.o}
+		${CC} ${CFLAGS} ${INC} -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS} 
-	@	+$(MAKE) -C libft
-	@	cc -o ${NAME} ${CFLAGS} ${OBJS} ${LIBS}
+		+$(MAKE) -C libft
+		cc -o ${NAME} ${CFLAGS} ${OBJS} ${LIBS}
 
 all:	${NAME}
 
 clean:	
-	# @	+$(MAKE) -C libft clean
+#	@	+$(MAKE) -C libft clean
 	@	rm -f ${OBJS} ${DEPS} ${OBJSBONUS} ${DEPSBONUS}
 
 fclean:	clean;
