@@ -1,41 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   last_part.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/25 14:01:56 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/25 19:06:16 by tchevrie         ###   ########.fr       */
+/*   Created: 2023/01/25 19:01:25 by tchevrie          #+#    #+#             */
+/*   Updated: 2023/01/25 19:04:47 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	print_file(int fd)
+int	last_part(int fd[2], int pipefd[2], char *arg, char **path)
 {
-	char	*line;
+	int	pid;
 
-	while (1)
+	close(pipefd[1]);
+	pid = fork();
+	if (pid == -1)
 	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		ft_putstr_fd(line, 2);
-		free(line);
+		perror("pipex: fork");
+		return (close(pipefd[0]), close(pipefd[1]), end_pipex(fd, path), 0);
 	}
-}
-
-void	print_path(char **path)
-{
-	size_t	i;
-
-	if (!path)
-		return ;
-	i = 0;
-	while (path[i])
+	else if (pid == 0)
 	{
-		ft_printf("%s\n", path[i]);
-		i++;
+		dup2(pipefd[0], STDIN_FILENO);
+		dup2(fd[1], STDOUT_FILENO);
+		execute_cmd(arg, path);
+		close(pipefd[0]);
+		end_pipex(fd, path);
+		exit(1);
 	}
+	else
+	{
+		wait(NULL);
+		close(pipefd[0]);
+	}
+	return (1);
 }
