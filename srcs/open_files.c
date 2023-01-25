@@ -6,7 +6,7 @@
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 01:57:46 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/26 00:02:31 by tchevrie         ###   ########.fr       */
+/*   Updated: 2023/01/26 00:16:41 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,19 @@ static int	open_outfile(const char *filename)
 	return (fd);
 }
 
+static int	here_doc_open_outfile(const char *filename)
+{
+	int	fd;
+
+	fd = open(filename, O_WRONLY | O_APPEND | O_CREAT, 0644);
+	return (fd);
+}
+
 int	open_files(char *infile, char *outfile, int fd[2])
 {
 	if (!infile)
 	{
-		*(fd + 1) = open_outfile(outfile);
+		*(fd + 1) = here_doc_open_outfile(outfile);
 		if (*(fd + 1) == -1)
 			return (ft_putstr_fd("pipex: ", 2), perror(outfile), 0);
 		return (1);

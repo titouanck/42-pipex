@@ -6,7 +6,7 @@
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:26:58 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/26 00:08:15 by tchevrie         ###   ########.fr       */
+/*   Updated: 2023/01/26 00:12:49 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	here_doc(char **args, int size, t_env *env)
 
 	fd[0] = 0;
 	fd[1] = -1;
-	if (!here_doc_first_part(fd, pipefd, args[2], env))
+	if (!here_doc_first_part(fd, pipefd, args[1], env))
 		return (1);
 	middle_cmds = size - 4;
 	i = 1;
