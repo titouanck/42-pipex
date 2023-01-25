@@ -29,6 +29,12 @@ fclean:	clean;
 	@	+$(MAKE) -C libft fclean
 	@	@rm -f ${NAME} ${BONUS}
 
+run:
+		make clean
+		gcc -g srcs/*.c libft/*/*.c -I inc -I libft/
+		clear
+	@	./a.out infile "grep i" "grep i" outfile
+
 re:	fclean all
 
 # My rules

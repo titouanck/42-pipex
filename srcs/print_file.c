@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   end_pipex.c                                        :+:      :+:    :+:   */
+/*   print_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/25 11:42:09 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/25 17:23:24 by tchevrie         ###   ########.fr       */
+/*   Created: 2023/01/25 14:01:56 by tchevrie          #+#    #+#             */
+/*   Updated: 2023/01/25 16:44:04 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	end_pipex(int fd[2], char **path)
+void	print_file(int fd)
 {
-	close(fd[0]);
-	close(fd[1]);
-	free_path(path);
+	char *line;
+
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		ft_putstr_fd(line, 2);
+		free(line);
+	}
 }
