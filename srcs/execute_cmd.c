@@ -6,7 +6,7 @@
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 02:41:59 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/25 21:20:25 by tchevrie         ###   ########.fr       */
+/*   Updated: 2023/01/26 00:07:58 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,6 @@ static int	execute_cmd_pid_0(char *cmd, t_env *env, char **args)
 		}
 		i++;
 	}
-	err = ft_strrjoin("pipex: command not found: ", args[0], "\n");
-	if (err)
-	{
-		ft_putstr_fd(err, 2);
-		free(err);
-	}
 	return (1);
 }
 
@@ -48,6 +42,7 @@ int	execute_cmd(char *cmd, t_env *env)
 	int		pid;
 	int		return_value;
 	int		status;
+	char	*err;
 
 	args = ft_split(cmd, ' ');
 	if (!args)
@@ -60,6 +55,10 @@ int	execute_cmd(char *cmd, t_env *env)
 		return_value = execute_cmd_pid_0(cmd, env, args);
 		if (return_value == 0)
 			return (0);
+		err = ft_strrjoin("pipex: command not found: ", args[0], "\n");
+		ft_putstr_fd(err, 2);
+		if (err)
+			free(err);
 	}
 	else
 		wait(&status);

@@ -6,7 +6,7 @@
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 11:42:09 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/25 17:39:59 by tchevrie         ###   ########.fr       */
+/*   Updated: 2023/01/25 23:37:43 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	end_pipex(int fd[2], char **path)
 {
-	close(fd[0]);
-	close(fd[1]);
+	if (fd[0] > 0)
+		close(fd[0]);
+	if (fd[1] > 0)
+		close(fd[1]);
 	free_tabstr(path);
 }

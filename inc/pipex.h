@@ -6,7 +6,7 @@
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:27:09 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/25 20:05:05 by tchevrie         ###   ########.fr       */
+/*   Updated: 2023/01/26 00:02:35 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_env
 
 // first_part.c
 int		first_part(int fd[2], int pipefd[2], char *arg, t_env *env);
+int		here_doc_first_part(int fd[2], int pipefd[2], char *arg, t_env *env);
 
 // middle_part.c
 int		middle_part(int fd[2], int pipefd[2], char *arg, t_env *env);
