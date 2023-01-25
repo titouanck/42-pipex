@@ -6,7 +6,7 @@
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 01:57:46 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/25 02:49:30 by tchevrie         ###   ########.fr       */
+/*   Updated: 2023/01/25 04:46:16 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	open_outfile(const char *filename)
 {
 	int	fd;
 
-	fd = open(filename, O_WRONLY | O_CREAT, 0644);
+	fd = open(filename, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	return (fd);
 }
 
