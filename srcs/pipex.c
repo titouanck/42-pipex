@@ -6,7 +6,7 @@
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:26:58 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/25 17:39:53 by tchevrie         ###   ########.fr       */
+/*   Updated: 2023/01/25 18:02:26 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int	first_part(int fd[2], int pipefd[2], char *arg, char **path)
 	int	pid;
 	
 	if (pipe(pipefd) == -1)
-		return (perror("pipe()"), end_pipex(fd, path), 0);
+		return (perror("pipex: pipe"), end_pipex(fd, path), 0);
 	pid = fork();
 	if (pid == -1)
 	{
-		perror("fork()");		
+		perror("pipex: fork");		
 		return (close(pipefd[0]), close(pipefd[1]), end_pipex(fd, path), 0);
 	}
 	else if (pid == 0)
@@ -81,7 +81,7 @@ int	last_part(int fd[2], int pipefd[2], char *arg, char **path)
 	pid = fork();
 	if (pid == -1)
 	{
-		perror("fork()");		
+		perror("pipex: fork");		
 		return (close(pipefd[0]), close(pipefd[1]), end_pipex(fd, path), 0);
 	}
 	else if (pid == 0)

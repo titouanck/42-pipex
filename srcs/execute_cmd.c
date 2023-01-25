@@ -6,7 +6,7 @@
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 02:41:59 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/25 17:39:01 by tchevrie         ###   ########.fr       */
+/*   Updated: 2023/01/25 18:03:10 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	execute_cmd(char *cmd, char **path)
 		return (ft_putstr_fd(ERR_ALLOC, 2), 0);
 	pid = fork();
 	if (pid == -1)
-		return (perror("fork()"), free_tabstr(args), 0);
+		return (perror("pipex: fork"), free_tabstr(args), 0);
 	if (pid == 0)
 	{
 		i = 0;
