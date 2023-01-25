@@ -1,0 +1,16 @@
+total 140
+-rw-r--r-- 1 tchevrie 2022_paris   732 Jan 25 17:08 Makefile
+-rwxr-xr-x 1 tchevrie 2022_paris 81664 Jan 25 17:10 a.out
+-rw-r--r-- 1 tchevrie 2022_paris     0 Jan 25 19:26 etst3
+drwxr-xr-x 2 tchevrie 2022_paris  4096 Jan 25 11:20 inc
+-rwxr-xr-x 1 tchevrie 2022_paris     0 Jan 25 19:28 infile
+-rwxr-xr-x 1 tchevrie 2022_paris    44 Jan 25 19:10 infilebis
+drwxr-xr-x 5 tchevrie 2022_paris  4096 Jan 25 19:13 libft
+-rw-r--r-- 1 tchevrie 2022_paris     0 Jan 25 19:10 outfile
+-rw-r--r-- 1 tchevrie 2022_paris     0 Jan 25 19:10 outfilebis
+-rwxr-xr-x 1 tchevrie 2022_paris 27272 Jan 25 19:24 pipex
+drwxr-xr-x 2 tchevrie 2022_paris  4096 Jan 25 19:24 srcs
+-rw-r--r-- 1 tchevrie 2022_paris     2 Jan 25 19:18 test1
+-rw-r--r-- 1 tchevrie 2022_paris     0 Jan 25 19:24 test2
+-rw-r--r-- 1 tchevrie 2022_paris    56 Jan 25 19:10 tester.log
+-rwxr--r-- 1 tchevrie 2022_paris  1663 Jan 25 18:53 tester.sh

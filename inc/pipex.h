@@ -6,7 +6,7 @@
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:27:09 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/25 19:00:36 by tchevrie         ###   ########.fr       */
+/*   Updated: 2023/01/25 20:05:05 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@
 # define ERR_PATHNOTFOUND "pipex: could not find PATH.\n"
 # define ERR_ALLOC "pipex: could not allocate memory.\n"
 
-typedef struct s_fd
+typedef struct s_env
 {
-	int	in;
-	int	out;
-}		t_fd;
+	char	**path;
+	char	**envp;
+}			t_env;
 
 // first_part.c
-int		first_part(int fd[2], int pipefd[2], char *arg, char **path);
+int		first_part(int fd[2], int pipefd[2], char *arg, t_env *env);
 
 // middle_part.c
-int		middle_part(int fd[2], int pipefd[2], char *arg, char **path);
+int		middle_part(int fd[2], int pipefd[2], char *arg, t_env *env);
 
 // last_part.c
-int		last_part(int fd[2], int pipefd[2], char *arg, char **path);
+int		last_part(int fd[2], int pipefd[2], char *arg, t_env *env);
 
 // get_path.c
 char	**get_path(char *envp[]);
@@ -45,7 +45,7 @@ char	**get_path(char *envp[]);
 int		open_files(char *infile, char *outfile, int fd[2]);
 
 // execute_cmd.c
-int		execute_cmd(char *cmd, char **path);
+int		execute_cmd(char *cmd, t_env *env);
 
 // end_pipex.c
 void	end_pipex(int fd[2], char **path);
