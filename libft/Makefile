@@ -34,18 +34,18 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -I ./
 
 .c.o:
-		${CC} ${CFLAGS} -MMD -c $< -o ${<:.c=.o}
+	@	${CC} ${CFLAGS} -MMD -c $< -o ${<:.c=.o}
 
 ${LIB}:	${OBJS}
-		ar -rsc ${LIB} ${OBJS}
+	@	ar -rsc ${LIB} ${OBJS}
 
 all: 	${LIB}
 
 clean:	
-		rm -f ${OBJS} ${DEPS}
+	@	rm -f ${OBJS} ${DEPS}
 
 fclean:	clean;
-		rm -f ${LIB}
+	@	rm -f ${LIB}
 
 re:	fclean all
 

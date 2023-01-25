@@ -6,7 +6,7 @@
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:13:35 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/19 02:48:06 by tchevrie         ###   ########.fr       */
+/*   Updated: 2023/01/25 02:25:11 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 void	ft_swap(long *a, long *b);
 int		ft_strcmp(const char *s1, const char *s2);
+char	*ft_strrjoin(char const *s1, char const *s2, char const *s3);
 
 #endif
