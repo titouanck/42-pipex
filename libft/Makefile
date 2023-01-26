@@ -31,7 +31,7 @@ LIB = libft.a
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra -I ./
+CFLAGS = -Wall -Wextra -Werror -I ./
 
 .c.o:
 		${CC} ${CFLAGS} -MMD -c $< -o ${<:.c=.o}

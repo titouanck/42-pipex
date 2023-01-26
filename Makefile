@@ -9,7 +9,7 @@ LIBS = ${INC} ${LIBFTPATH}
 
 NAME = pipex
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Wextra -Werror 
 
 .c.o:
 		${CC} ${CFLAGS} ${INC} -c $< -o ${<:.c=.o}
