@@ -6,13 +6,13 @@
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 02:41:59 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/26 00:27:33 by tchevrie         ###   ########.fr       */
+/*   Updated: 2023/01/26 11:23:45 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static int	execute_cmd_pid_0(t_env *env, char **args)
+static int	try_to_execute(t_env *env, char **args)
 {
 	size_t	i;
 	char	*bin;
@@ -38,27 +38,18 @@ static int	execute_cmd_pid_0(t_env *env, char **args)
 int	execute_cmd(char *cmd, t_env *env)
 {
 	char	**args;
-	int		pid;
 	int		status;
 	char	*err;
 
 	args = ft_split(cmd, ' ');
 	if (!args)
 		return (ft_putstr_fd(ERR_ALLOC, 2), 0);
-	pid = fork();
-	if (pid == -1)
-		return (perror("pipex: fork"), free_tabstr(args), 0);
-	if (pid == 0)
-	{
-		status = execute_cmd_pid_0(env, args);
-		if (status == 0)
-			return (0);
-		err = ft_strrjoin("pipex: command not found: ", args[0], "\n");
-		ft_putstr_fd(err, 2);
-		if (err)
-			free(err);
-	}
-	else
-		wait(&status);
+	status = try_to_execute(env, args);
+	if (status == 0)
+		return (0);
+	err = ft_strrjoin("pipex: command not found: ", args[0], "\n");
+	ft_putstr_fd(err, 2);
+	if (err)
+		free(err);
 	return (free_tabstr(args), status);
 }

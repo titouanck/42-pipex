@@ -6,7 +6,7 @@
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 19:00:43 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/26 01:32:39 by tchevrie         ###   ########.fr       */
+/*   Updated: 2023/01/26 11:24:54 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void	first_part_child(int fd[2], int pipefd[2], char *arg, t_env *env)
 	dup2(pipefd[1], STDOUT_FILENO);
 	execute_cmd(arg, env);
 	end_pipex(fd, env->path);
-	close(fd[0]);
 	close(pipefd[1]);
 	exit(1);
 }
