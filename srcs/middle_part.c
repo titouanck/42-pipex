@@ -6,7 +6,7 @@
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 19:01:05 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/25 21:11:45 by tchevrie         ###   ########.fr       */
+/*   Updated: 2023/01/26 12:41:55 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int	middle_part(int fd[2], int pipefd[2], char *arg, t_env *env)
 	}
 	else
 	{
-		wait(NULL);
-		close(pipefd[0]);
 		pipefd[0] = new_pipefd[0];
 		pipefd[1] = new_pipefd[1];
 	}

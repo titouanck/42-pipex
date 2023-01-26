@@ -20,6 +20,8 @@ ${NAME}:	${OBJS}
 
 all:	${NAME}
 
+bonus:	${NAME}
+
 clean:	
 	@	+$(MAKE) -C libft clean
 	@	rm -f ${OBJS} ${DEPS} ${OBJSBONUS} ${DEPSBONUS}

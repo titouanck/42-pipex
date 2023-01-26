@@ -6,11 +6,18 @@
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:26:58 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/26 11:52:35 by tchevrie         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:00:08 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+static void	wait_childs(void)
+{
+	while (1)
+		if (wait(NULL) <= 0)
+			return ;
+}
 
 static int	pipex(char **args, int size, t_env *env)
 {
@@ -27,10 +34,7 @@ static int	pipex(char **args, int size, t_env *env)
 	middle_cmds = size - 4;
 	i = 1;
 	while (middle_cmds-- > 0)
-	{
-		middle_part(fd, pipefd, args[1 + i], env);
-		i++;
-	}
+		middle_part(fd, pipefd, args[1 + i++], env);
 	if (fd[0] > 0)
 		close(fd[0]);
 	fd[0] = -1;
@@ -38,7 +42,7 @@ static int	pipex(char **args, int size, t_env *env)
 	if (fd[1] == -1)
 		return (end_pipex(fd, env->path), 1);
 	return_value = last_part(fd, pipefd, args[size - 2], env);
-	wait(NULL);
+	wait_childs();
 	return (end_pipex(fd, env->path), return_value);
 }
 
