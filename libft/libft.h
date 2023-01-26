@@ -6,7 +6,7 @@
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:13:35 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/25 17:38:29 by tchevrie         ###   ########.fr       */
+/*   Updated: 2023/01/26 15:41:15 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ void	ft_swap(long *a, long *b);
 int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strrjoin(char const *s1, char const *s2, char const *s3);
 void	free_tabstr(char **tab);
+size_t	ft_countc(const char *str, char c);
 
 #endif
