@@ -6,7 +6,7 @@
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:27:09 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/26 00:02:35 by tchevrie         ###   ########.fr       */
+/*   Updated: 2023/01/26 01:25:53 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ int		last_part(int fd[2], int pipefd[2], char *arg, t_env *env);
 char	**get_path(char *envp[]);
 
 // open_files.c
-int		open_files(char *infile, char *outfile, int fd[2]);
+int		open_infile(const char *filename);
+int		open_outfile(const char *filename);
+int		here_doc_open_outfile(const char *filename);
 
 // execute_cmd.c
 int		execute_cmd(char *cmd, t_env *env);

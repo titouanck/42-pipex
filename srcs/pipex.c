@@ -6,7 +6,7 @@
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:26:58 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/26 00:12:49 by tchevrie         ###   ########.fr       */
+/*   Updated: 2023/01/26 01:26:06 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ static int	pipex(char **args, int size, t_env *env)
 	size_t	i;
 	int		return_value;
 
-	if (!open_files(args[0], args[size - 1], fd))
-		return (free_tabstr(env->path), 1);
+	fd[0] = open_infile(args[0]);
 	if (!first_part(fd, pipefd, args[1], env))
 		return (1);
 	middle_cmds = size - 4;
@@ -32,6 +31,11 @@ static int	pipex(char **args, int size, t_env *env)
 		middle_cmds--;
 		i++;
 	}
+	close(fd[0]);
+	fd[0] = -1;
+	fd[1] = open_outfile(args[size - 1]);
+	if (fd[1] == -1)
+		return (end_pipex(fd, env->path), 1);
 	return_value = last_part(fd, pipefd, args[size - 2], env);
 	return (end_pipex(fd, env->path), return_value);
 }
@@ -45,7 +49,6 @@ static int	here_doc(char **args, int size, t_env *env)
 	int		return_value;
 
 	fd[0] = 0;
-	fd[1] = -1;
 	if (!here_doc_first_part(fd, pipefd, args[1], env))
 		return (1);
 	middle_cmds = size - 4;
@@ -56,7 +59,8 @@ static int	here_doc(char **args, int size, t_env *env)
 		middle_cmds--;
 		i++;
 	}
-	if (!open_files(NULL, args[size - 1], fd))
+	fd[1] = here_doc_open_outfile(args[size - 1]);
+	if (fd[1] == -1)
 		return (end_pipex(fd, env->path), 1);
 	return_value = last_part(fd, pipefd, args[size - 2], env);
 	return (end_pipex(fd, env->path), return_value);

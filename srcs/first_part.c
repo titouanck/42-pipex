@@ -6,11 +6,23 @@
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 19:00:43 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/26 00:13:22 by tchevrie         ###   ########.fr       */
+/*   Updated: 2023/01/26 01:32:39 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+static void	first_part_child(int fd[2], int pipefd[2], char *arg, t_env *env)
+{
+	close(pipefd[0]);
+	dup2(fd[0], STDIN_FILENO);
+	dup2(pipefd[1], STDOUT_FILENO);
+	execute_cmd(arg, env);
+	end_pipex(fd, env->path);
+	close(fd[0]);
+	close(pipefd[1]);
+	exit(1);
+}
 
 int	first_part(int fd[2], int pipefd[2], char *arg, t_env *env)
 {
@@ -18,6 +30,8 @@ int	first_part(int fd[2], int pipefd[2], char *arg, t_env *env)
 
 	if (pipe(pipefd) == -1)
 		return (perror("pipex: pipe"), end_pipex(fd, env->path), 0);
+	if (fd[0] == -1)
+		return (1);
 	pid = fork();
 	if (pid == -1)
 	{
@@ -26,15 +40,7 @@ int	first_part(int fd[2], int pipefd[2], char *arg, t_env *env)
 		end_pipex(fd, env->path), 0);
 	}
 	else if (pid == 0)
-	{
-		close(pipefd[0]);
-		dup2(fd[0], STDIN_FILENO);
-		dup2(pipefd[1], STDOUT_FILENO);
-		execute_cmd(arg, env);
-		end_pipex(fd, env->path);
-		close(pipefd[1]);
-		exit(1);
-	}
+		first_part_child(fd, pipefd, arg, env);
 	return (1);
 }
 
@@ -54,12 +60,13 @@ int	here_doc_first_part(int fd[2], int pipefd[2], char *arg, t_env *env)
 			free(line);
 			break ;
 		}
-		else if (line)
-		{
+		else if (line && ft_strchr(line, '\n'))
 			ft_putstr("> ");
+		if (line && ft_strcmp(line, arg) != 0)
+		{
 			ft_putstr_fd(line, pipefd[1]);
 			free(line);
-		}
+		}	
 	}
 	return (1);
 }
