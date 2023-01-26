@@ -6,7 +6,7 @@
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 02:41:59 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/26 15:42:13 by tchevrie         ###   ########.fr       */
+/*   Updated: 2023/01/26 22:17:15 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static int	try_to_execute(t_env *env, char **args)
 	char	*bin;
 
 	i = 0;
+	execve(args[0], args, env->envp);
 	while (1)
 	{
 		if (!((env->path)[i]))
