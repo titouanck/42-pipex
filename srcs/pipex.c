@@ -6,7 +6,7 @@
 /*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:26:58 by tchevrie          #+#    #+#             */
-/*   Updated: 2023/01/26 01:26:06 by tchevrie         ###   ########.fr       */
+/*   Updated: 2023/01/26 11:18:51 by tchevrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static int	pipex(char **args, int size, t_env *env)
 	size_t	i;
 	int		return_value;
 
+	fd[1] = -1;
 	fd[0] = open_infile(args[0]);
 	if (!first_part(fd, pipefd, args[1], env))
 		return (1);
